@@ -1,4 +1,4 @@
-package com.example.todoapp.database;
+package com.example.todoapp.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -18,7 +18,7 @@ public interface TaskDao {
     void insertTask(Task task);
 
     @Query("SELECT * FROM table_task")
-    LiveData<List<Task>> getTask();
+    LiveData<List<Task>> getAllTask();
 
     @Query("SELECT * FROM table_task where table_task.task_id == :id")
     LiveData<Task> get(long id);
