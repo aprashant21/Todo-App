@@ -7,6 +7,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.todoapp.data.TodoDao;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -39,4 +41,7 @@ public abstract class TaskDatabase extends RoomDatabase {
 
         return sInstance;
     }
+
+    public abstract TaskDao taskDao();
+
 }
