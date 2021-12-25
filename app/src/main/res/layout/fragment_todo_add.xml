@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".fragments.TodoAddFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/addFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:gravity="center"
+        android:text="Add Fragment"
+        android:textSize="20sp" />
 </FrameLayout>

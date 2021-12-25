@@ -3,4 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="floating_action_desc">float action button</string>
+    <string name="today">Today</string>
+    <string name="action_help">help</string>
+    <string name="action_about">about</string>
 </resources>
