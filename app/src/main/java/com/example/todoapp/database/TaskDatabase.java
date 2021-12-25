@@ -5,14 +5,18 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
+
+import com.example.todoapp.data.Converter;
 import com.example.todoapp.data.TaskDao;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.todoapp.models.Task;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Task.class},version = 1,exportSchema = false)
+@TypeConverters({Converter.class})
 public abstract class TaskDatabase extends RoomDatabase {
     public static final int NUMBER_OF_THREADS=4;
     public static final String DATABASE_NAME = "todo_db";
