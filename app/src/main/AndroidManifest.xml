@@ -11,6 +11,7 @@
         android:theme="@style/Theme.ToDoApp">
         <activity android:name=".MainActivity"
             android:theme="@style/Theme.ToDoApp.NoActionBar"
+            android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

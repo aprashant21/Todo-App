@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todoapp.R;
+import com.example.todoapp.data.Formatter;
 import com.example.todoapp.models.Task;
 import com.google.android.material.chip.Chip;
 
@@ -35,7 +36,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task task = todolist.get(position);
+        String dateFormatter= Formatter.formatDate(task.getEndDate());
         holder.taskTitle.setText(task.getTaskTitle());
+        holder.todayChip.setText(dateFormatter);
     }
 
     @Override

@@ -4,6 +4,23 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="floating_action_desc">float action button</string>
     <string name="today">Today</string>
-    <string name="action_help">help</string>
-    <string name="action_about">about</string>
+    <string name="action_help">Help</string>
+    <string name="action_about">About</string>
+    <string name="enter_todo_hint">Enter Task Title</string>
+    <string name="image_description">priority image button</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="tv_description">Testing this thing..</string>
+    <string name="tv_title">Title</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="today_calendar_button">Today</string>
+    <string name="empty_field">Empty task</string>
+    <string name="end_date_text">End Date</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="radio_high">High</string>
+    <string name="radio_med">Medium</string>
+    <string name="radio_low">Low</string>
+    <string name="add_task">Add a Task</string>
+    <string name="todo">TODO</string>
 </resources>

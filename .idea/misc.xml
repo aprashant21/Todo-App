@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/PRINT 2/DMA/ToDo App/app/src/main/res/font/rdgerter.xml" value="0.2" />
-        <entry key="..\:/PRINT 2/DMA/ToDo App/app/src/main/res/layout/activity_main.xml" value="0.21" />
+        <entry key="..\:/PRINT 2/DMA/ToDo App/app/src/main/res/layout-land/fragment_todo_list.xml" value="0.17760416666666667" />
+        <entry key="..\:/PRINT 2/DMA/ToDo App/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/PRINT 2/DMA/ToDo App/app/src/main/res/layout/bottom_sheet.xml" value="0.1" />
         <entry key="..\:/PRINT 2/DMA/ToDo App/app/src/main/res/layout/fragment_todo_add.xml" value="0.18645833333333334" />
         <entry key="..\:/PRINT 2/DMA/ToDo App/app/src/main/res/layout/fragment_todo_list.xml" value="0.16979166666666667" />
         <entry key="..\:/PRINT 2/DMA/ToDo App/app/src/main/res/layout/item_task.xml" value="0.18645833333333334" />

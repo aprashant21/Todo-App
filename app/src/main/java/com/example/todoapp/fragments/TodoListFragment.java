@@ -51,14 +51,17 @@ public class TodoListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle("Task List");
         viewModel = new ViewModelProvider(this).get(TaskViewModel.class);
 
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TodoAddFragment fragment = TodoAddFragment.newInstance();
-                FragmentManager fm = getParentFragmentManager();
-                fm.beginTransaction().replace(R.id.fragment_container,fragment).addToBackStack(null).commit();
+                if(savedInstanceState==null) {
+                    TodoAddFragment fragment = TodoAddFragment.newInstance();
+                    FragmentManager fm = getParentFragmentManager();
+                    fm.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                }
             }
         });
 
