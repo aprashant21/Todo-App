@@ -61,18 +61,23 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
             todayChip=itemView.findViewById(R.id.todo_item_chip);
             this.onTodoClickListener = todoClickListener;
             itemView.setOnClickListener(this);
+            radioButton.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             int id = view.getId();
+            Task currentTask = todolist.get(getAdapterPosition());
             if(id==R.id.todo_item_layout){
-                Task currentTask = todolist.get(getAdapterPosition());
-                onTodoClickListener.toDoCLick(getAdapterPosition(),currentTask);
+                onTodoClickListener.toDoClick(getAdapterPosition(),currentTask);
+            }
+            else if(id==R.id.todo_radio_button) {
+                onTodoClickListener.toDoRadioButtonClick(currentTask);
             }
         }
     }
     public interface TodoClickListener{
-        void toDoCLick(int adapterPosition, Task task);
+        void toDoClick(int adapterPosition, Task task);
+        void toDoRadioButtonClick(Task task);
     }
 }

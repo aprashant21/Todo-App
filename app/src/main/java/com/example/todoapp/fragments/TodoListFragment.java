@@ -78,7 +78,12 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
     }
 
     @Override
-    public void toDoCLick(int adapterPosition, Task task) {
+    public void toDoClick(int adapterPosition, Task task) {
         Log.d("CLICK","onCLick"+task.startDate);
+    }
+
+    @Override
+    public void toDoRadioButtonClick(Task task) {
+        TaskViewModel.delete(task);
     }
 }
