@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class TodoListFragment extends Fragment {
+public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickListener {
     private FloatingActionButton fabButton;
     private RecyclerView recyclerView;
     private TaskViewModel viewModel;
@@ -51,7 +52,7 @@ public class TodoListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Task List");
+        getActivity().setTitle("TASK LIST");
         viewModel = new ViewModelProvider(this).get(TaskViewModel.class);
 
         fabButton.setOnClickListener(new View.OnClickListener() {
@@ -68,11 +69,16 @@ public class TodoListFragment extends Fragment {
         viewModel.getAllTasks().observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
             @Override
             public void onChanged(List<Task> tasks) {
-                adapter = new TaskAdapter(tasks);
+                adapter = new TaskAdapter(tasks,TodoListFragment.this);
                 if(tasks!=null) {
                     recyclerView.setAdapter(adapter);
                 }
             }
         });
+    }
+
+    @Override
+    public void toDoCLick(int adapterPosition, Task task) {
+        Log.d("CLICK","onCLick"+task.startDate);
     }
 }
