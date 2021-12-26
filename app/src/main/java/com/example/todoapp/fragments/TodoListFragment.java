@@ -1,5 +1,7 @@
 package com.example.todoapp.fragments;
 
+import static com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype.Fall;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ import com.example.todoapp.R;
 import com.example.todoapp.adapter.TaskAdapter;
 import com.example.todoapp.models.Task;
 import com.example.todoapp.models.TaskViewModel;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -84,6 +87,25 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
 
     @Override
     public void toDoRadioButtonClick(Task task) {
-        TaskViewModel.delete(task);
+        NiftyDialogBuilder dialogBuilder=NiftyDialogBuilder.getInstance(getContext());
+        dialogBuilder
+                .withTitle("Are You Sure ?")
+                .withIcon(R.drawable.ic_error)
+                .withDuration(400)
+                .isCancelableOnTouchOutside(false)
+                .withMessage(R.string.delete_message)
+                .withEffect(Fall)
+                .withButton1Text("COMPLETED")
+                .withButton2Text("CANCEL")
+                .setButton1Click(view -> {
+                    TaskViewModel.delete(task);
+                    task.setCompleted(true);
+                    dialogBuilder.dismiss();
+                    adapter.notifyDataSetChanged();
+                })
+                .setButton2Click(view -> {
+                    dialogBuilder.dismiss();
+                    adapter.notifyDataSetChanged();
+                }).show();
     }
 }

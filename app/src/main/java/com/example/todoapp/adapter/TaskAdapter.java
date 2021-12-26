@@ -41,6 +41,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
         String dateFormatter= Formatter.formatDate(task.getEndDate());
         holder.taskTitle.setText(task.getTaskTitle());
         holder.todayChip.setText(dateFormatter);
+        holder.radioButton.setChecked(false);
     }
 
     @Override

@@ -23,4 +23,5 @@
     <string name="radio_low">Low</string>
     <string name="add_task">Add a Task</string>
     <string name="todo">TODO</string>
+    <string name="delete_message">Do you really think that your task is completed ? This process can not be undone.</string>
 </resources>
