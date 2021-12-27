@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     //menu for about pages
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

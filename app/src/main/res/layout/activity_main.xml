@@ -36,7 +36,7 @@
                 android:fontFamily="@font/oval_light"
                 android:gravity="center"
                 android:text="TODO"
-                android:textColor="@color/oval_light_green"
+                android:textColor="@color/oval_light_grey"
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
                 android:fontFamily="@font/oval_light"
                 android:gravity="center"
                 android:text="APP"
-                android:textColor="@color/oval_light_green"
+                android:textColor="@color/teal_700"
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
@@ -74,7 +74,7 @@
             android:fontFamily="@font/oval_light"
             android:gravity="center"
             android:text="Manage All the Task TODO"
-            android:textColor="@color/oval_light_grey"
+            android:textColor="@color/oval_light_green"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -98,7 +98,6 @@
         android:layout_height="match_parent">
 
     </FrameLayout>
-
 
 
 </LinearLayout>

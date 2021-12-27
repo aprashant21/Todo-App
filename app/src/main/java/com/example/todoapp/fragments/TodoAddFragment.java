@@ -1,14 +1,11 @@
 package com.example.todoapp.fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +13,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.todoapp.R;
 import com.example.todoapp.models.Priority;
+import com.example.todoapp.models.SharedViewModel;
 import com.example.todoapp.models.Task;
 import com.example.todoapp.models.TaskViewModel;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
-
 import java.util.Calendar;
 import java.util.Date;
+
+import es.dmoral.toasty.Toasty;
 
 public class TodoAddFragment extends Fragment implements View.OnClickListener {
     private EditText taskTitle;
@@ -38,12 +35,15 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
     private TaskViewModel viewModel;
     private CalendarView calendarView;
     private RadioButton selectedRadioButton;
-    private int selectedId;
+    private int selectedButtonId;
     Chip todayChip;
     Chip tomorrowChip;
     private Date endDate;
     private Calendar calendar = Calendar.getInstance();
-    private Button addTaskButton;
+    private ImageButton addTaskButton;
+    private SharedViewModel sharedViewModel;
+    private boolean isEdit;
+    private Priority priority;
 
 
     public static TodoAddFragment newInstance(){
@@ -60,6 +60,8 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //change the app bar title
+        getActivity().setTitle("ADD TASK");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_todo_add,container,false);
         taskTitle = view.findViewById(R.id.task_title_editText);
@@ -80,10 +82,21 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if(sharedViewModel.getSelectItem().getValue()!=null){
+            isEdit = sharedViewModel.getIsEdit();
+            Task task = sharedViewModel.getSelectItem().getValue();
+            taskTitle.setText(task.getTaskTitle());
+            taskDetails.setText(task.getTaskDetails());
+        }
+
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("ADD TASK");
-        viewModel = new ViewModelProvider(this).get(TaskViewModel.class);
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
         calendarView.setOnDateChangeListener((calendarView, year, month, dayOfMonth) -> {
                 calendar.clear();
@@ -91,9 +104,26 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
                 endDate = calendar.getTime();
         });
 
+        priorityGroup.setOnCheckedChangeListener((radioGroup, checkedId) -> {
+            selectedButtonId = checkedId;
+            selectedRadioButton= view.findViewById(selectedButtonId);
+            if(selectedRadioButton.getId()==R.id.priority_high_rb){
+                priority = Priority.HIGH;
+            }
+            else if(selectedRadioButton.getId()==R.id.priority_med_rb){
+                priority = Priority.MEDIUM;
+            }
+            else if(selectedRadioButton.getId()==R.id.priority_low_rb){
+                priority = Priority.LOW;
+            }
+            else{
+                priority = Priority.LOW;
+            }
+        });
+
         addTaskButton.setOnClickListener(view1 -> {
 
-            if(validation() && endDate!=null) {
+            if(validation() & endDate!=null && priority!=null) {
                 addTask();
             }
         });
@@ -118,25 +148,45 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
         String details = taskDetails.getText().toString().trim();
 
         if(title.isEmpty()){
-            Toast.makeText(getContext(), "Kindly Enter Task Title", Toast.LENGTH_SHORT).show();
+            taskTitle.setError("Kindly Enter Task Title !");
             return false;
         }
-        if(details.isEmpty()){
-            Toast.makeText(getContext(), "Kindly Enter Task Description", Toast.LENGTH_SHORT).show();
+        else if(details.isEmpty()){
+            taskDetails.setError("Kindly Enter Task Description !");
+            return false;
+        }
+        else if(priority==null){
+            Toasty.warning(getContext(), "Kindly select the priority !", Toasty.LENGTH_SHORT,true).show();
+            return false;
+        }
+        else if(endDate==null){
+            Toasty.warning(getContext(), "Kindly select the priority !", Toasty.LENGTH_SHORT,true).show();
             return false;
         }
         else{
             return true;
         }
-
     }
-
 
     private void addTask() {
         String title = taskTitle.getText().toString().trim();
         String details = taskDetails.getText().toString().trim();
-        Task task = new Task(title,details, Priority.HIGH, endDate,Calendar.getInstance().getTime(),false);
-        TaskViewModel.insert(task);
+        Task task = new Task(title,details, priority, endDate,Calendar.getInstance().getTime(),false);
+        if(isEdit){
+            Task updateTask = sharedViewModel.getSelectItem().getValue();
+            updateTask.setTaskTitle(title);
+            updateTask.setTaskDetails(details);
+            updateTask.setEndDate(endDate);
+            updateTask.setPriority(priority);
+            updateTask.setStartDate(Calendar.getInstance().getTime());
+            updateTask.setCompleted(false);
+            TaskViewModel.update(updateTask);
+            sharedViewModel.setIsEdit(false);
+
+        }
+        else {
+            TaskViewModel.insert(task);
+        }
         taskTitle.setText("");
         taskDetails.setText("");
         FragmentManager fm = getParentFragmentManager();

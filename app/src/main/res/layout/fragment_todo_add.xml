@@ -142,25 +142,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-            </LinearLayout>
+                <ImageButton
+                    android:id="@+id/add_task_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/purple_200"
+                    app:srcCompat="@drawable/ic_baseline_arrow_circle_up_24" />
 
-            <Button
-                android:id="@+id/add_task_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/customborder"
-                android:drawableLeft="@drawable/ic_baseline_add_24"
-                android:fontFamily="@font/cerebri_sans_extrabold_italic"
-                android:text="@string/add_task"
-                android:textColor="#DFD6D6"
-                android:textSize="16sp"
-                app:backgroundTint="@color/teal_700" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

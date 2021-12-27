@@ -52,6 +52,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
     implementation 'com.github.sd6352051:NiftyDialogEffects:v1.0.3'
+    implementation 'com.github.GrenderG:Toasty:1.5.2'
+
 
 
 }

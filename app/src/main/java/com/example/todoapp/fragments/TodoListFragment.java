@@ -2,8 +2,8 @@ package com.example.todoapp.fragments;
 
 import static com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype.Fall;
 
+import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,9 +17,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.todoapp.R;
 import com.example.todoapp.adapter.TaskAdapter;
+import com.example.todoapp.models.SharedViewModel;
 import com.example.todoapp.models.Task;
 import com.example.todoapp.models.TaskViewModel;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
@@ -30,12 +30,14 @@ import java.util.List;
 public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickListener {
     private FloatingActionButton fabButton;
     private RecyclerView recyclerView;
-    private TaskViewModel viewModel;
+    private TaskViewModel todoListViewModel;
+    private SharedViewModel sharedViewModel;
     private TaskAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -43,9 +45,13 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_todo_list, container, false);
 
+        getActivity().setTitle("TASK LIST"); //change the app bar title
+
+        //find view by their ids
         fabButton = view.findViewById(R.id.fab_button);
         recyclerView = view.findViewById(R.id.recyclerView_task);
 
+        //setting recyclerview adapter
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // Inflate the layout for this fragment
@@ -55,8 +61,9 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("TASK LIST");
-        viewModel = new ViewModelProvider(this).get(TaskViewModel.class);
+        todoListViewModel = new ViewModelProvider(requireActivity()).get(TaskViewModel.class);
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
 
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,11 +72,13 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
                     TodoAddFragment fragment = TodoAddFragment.newInstance();
                     FragmentManager fm = getParentFragmentManager();
                     fm.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+
+
                 }
             }
         });
 
-        viewModel.getAllTasks().observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
+        todoListViewModel.getAllTasks().observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
             @Override
             public void onChanged(List<Task> tasks) {
                 adapter = new TaskAdapter(tasks,TodoListFragment.this);
@@ -81,8 +90,13 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
     }
 
     @Override
-    public void toDoClick(int adapterPosition, Task task) {
-        Log.d("CLICK","onCLick"+task.startDate);
+    public void toDoClick(Task task) {
+        TodoAddFragment fragment = TodoAddFragment.newInstance();
+        sharedViewModel.selectItem(task);
+        sharedViewModel.setIsEdit(true);
+        FragmentManager fm = getParentFragmentManager();
+        fm.beginTransaction().replace(R.id.fragment_container,fragment ).addToBackStack(null).commit();
+
     }
 
     @Override
