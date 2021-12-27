@@ -18,11 +18,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import com.example.todoapp.R;
+import com.example.todoapp.data.Formatter;
 import com.example.todoapp.models.Priority;
 import com.example.todoapp.models.SharedViewModel;
 import com.example.todoapp.models.Task;
 import com.example.todoapp.models.TaskViewModel;
 import com.google.android.material.chip.Chip;
+
+import java.sql.Struct;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -32,7 +35,6 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
     private EditText taskTitle;
     private EditText taskDetails;
     private RadioGroup priorityGroup;
-    private TaskViewModel viewModel;
     private CalendarView calendarView;
     private RadioButton selectedRadioButton;
     private int selectedButtonId;
@@ -44,6 +46,9 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
     private SharedViewModel sharedViewModel;
     private boolean isEdit;
     private Priority priority;
+    private RadioButton priorityHigh;
+    private RadioButton priorityMedium;
+    private RadioButton priorityLow;
 
 
     public static TodoAddFragment newInstance(){
@@ -71,6 +76,9 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
         todayChip  = view.findViewById(R.id.chip_today);
         tomorrowChip = view.findViewById(R.id.chip_tomorrow);
         priorityGroup = view.findViewById(R.id.priority_radio_group);
+        priorityHigh = view.findViewById(R.id.priority_high_rb);
+        priorityMedium = view.findViewById(R.id.priority_med_rb);
+        priorityLow = view.findViewById(R.id.priority_low_rb);
 
         todayChip.setOnClickListener(this);
         tomorrowChip.setOnClickListener(this);
@@ -89,6 +97,18 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
             Task task = sharedViewModel.getSelectItem().getValue();
             taskTitle.setText(task.getTaskTitle());
             taskDetails.setText(task.getTaskDetails());
+            priority = task.getPriority();
+            if(priority == Priority.HIGH){
+               priorityHigh.setChecked(true);
+            }
+            else if(priority == Priority.LOW){
+                priorityLow.setChecked(true);
+            }
+            else{
+                priorityMedium.setChecked(true);
+            }
+            endDate = task.getEndDate();
+
         }
 
     }
@@ -160,7 +180,7 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
             return false;
         }
         else if(endDate==null){
-            Toasty.warning(getContext(), "Kindly select the priority !", Toasty.LENGTH_SHORT,true).show();
+            Toasty.warning(getContext(), "Kindly select the end Date !", Toasty.LENGTH_SHORT,true).show();
             return false;
         }
         else{

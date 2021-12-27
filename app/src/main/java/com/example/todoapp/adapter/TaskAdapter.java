@@ -36,18 +36,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task task = todolist.get(position);
-//        String dateFormatter= Formatter.formatDate(task.getEndDate());
-//        String month = Formatter.formatDateMonth(task.getEndDate());
-//        String date = Formatter.formatDateDate(task.getEndDate());
-//        holder.taskTitle.setText(task.getTaskTitle());
-//        holder.taskDetails.setText(task.getTaskDetails());
-//        holder.month.setText(month);
-//        holder.date.setText(date);
-        String day = Formatter.formatDateDay(task.getEndDate());
+        String day = Formatter.formatDay(task.getEndDate());
         holder.day.setText(day);
-        String month = Formatter.formatDateMonth(task.getEndDate());
+        String month = Formatter.formatMonth(task.getEndDate());
         holder.month.setText(month);
-        String date = Formatter.formatDateDate(task.getEndDate());
+        String date = Formatter.formatDate(task.getEndDate());
         holder.date.setText(date);
         holder.taskTitle.setText(task.getTaskTitle());
         holder.taskDetails.setText(task.getTaskDetails());
@@ -67,7 +60,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            radioButton = itemView.findViewById(R.id.todo_radio_button);
             taskTitle=itemView.findViewById(R.id.title);
             taskDetails = itemView.findViewById(R.id.description);
             radioButton = itemView.findViewById(R.id.todo_radio_button2);

@@ -85,13 +85,15 @@
                     android:textSize="20sp"
                     tools:text="Full house" />
 
-                <RadioButton
+                <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/todo_radio_button2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="0dp"
+                    android:checked="false"
 
-                    />
+                    android:padding="0dp"
+                    android:selectAllOnFocus="false"
+                    android:shadowColor="#B53C3C" />
 
             </LinearLayout>
 

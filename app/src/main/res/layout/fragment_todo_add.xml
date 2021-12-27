@@ -26,7 +26,7 @@
                 android:fontFamily="@font/cerebri_sans_bold"
                 android:hint="Enter Task Title"
                 android:maxLength="20"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -40,8 +40,8 @@
                 android:fontFamily="@font/cerebri_sans_book"
                 android:hint="Enter Task Description"
                 android:inputType="textMultiLine|textImeMultiLine"
-                android:maxLength="20"
-                android:textSize="16sp"
+                android:maxLength="30"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 tools:ignore="TouchTargetSizeCheck" />
 
@@ -147,10 +147,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@color/purple_200"
+                    android:background="@color/white"
                     app:srcCompat="@drawable/ic_baseline_arrow_circle_up_24" />
 
             </LinearLayout>
