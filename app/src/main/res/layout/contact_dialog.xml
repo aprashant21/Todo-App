@@ -36,22 +36,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/emailText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:fontFamily="@font/cerebri_sans_extrabold_italic"
-                android:minHeight="48dp"
-                android:text="@string/my_email"
-                android:textColor="@color/oval_light_grey"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/mobileNumText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,6 +45,20 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/cerebri_sans_extrabold_italic"
                 android:text="@string/mobile"
+                android:textColor="@color/oval_light_grey"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mobileNumText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/cerebri_sans_extrabold_italic"
+                android:text="@string/my_email"
                 android:textColor="@color/oval_light_grey"
                 android:textSize="16sp"
                 android:textStyle="bold" />

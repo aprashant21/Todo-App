@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:9823643590"));
                 startActivity(intent);
+                dialog.dismiss();
             });
             //email now button
             emailBtn.setOnClickListener(view -> {
@@ -90,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra(Intent.EXTRA_SUBJECT, "your_subject");
                     intent.putExtra(Intent.EXTRA_TEXT, "your_text");
                     startActivity(intent);
+                    dialog.dismiss();
                 }catch(ActivityNotFoundException e){
                     Log.d("TAG",e.getMessage()+"");
+                    dialog.dismiss();
                 }
             });
         }

@@ -17,7 +17,7 @@ public interface TaskDao {
     @Insert
     void insertTask(Task task);
 
-    @Query("SELECT * FROM table_task")
+    @Query("SELECT * FROM table_task ORDER BY end_date asc")
     LiveData<List<Task>> getAllTask();
 
     @Query("SELECT * FROM table_task where table_task.task_id == :id")
