@@ -2,7 +2,6 @@ package com.example.todoapp.fragments;
 
 import static com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype.Fall;
 
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +11,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.example.todoapp.R;
 import com.example.todoapp.adapter.TaskAdapter;
@@ -27,7 +23,6 @@ import com.example.todoapp.models.Task;
 import com.example.todoapp.models.TaskViewModel;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
 
 public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickListener {
@@ -36,7 +31,6 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
     private TaskViewModel todoListViewModel;
     private SharedViewModel sharedViewModel;
     private TaskAdapter adapter;
-    private boolean isEdit;
     private ImageView noDataImage;
 
     @Override

@@ -10,25 +10,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import com.example.todoapp.R;
-import com.example.todoapp.data.Formatter;
 import com.example.todoapp.models.Priority;
 import com.example.todoapp.models.SharedViewModel;
 import com.example.todoapp.models.Task;
 import com.example.todoapp.models.TaskViewModel;
 import com.google.android.material.chip.Chip;
-
-import java.sql.Struct;
 import java.util.Calendar;
 import java.util.Date;
-
 import es.dmoral.toasty.Toasty;
 
 public class TodoAddFragment extends Fragment implements View.OnClickListener {
