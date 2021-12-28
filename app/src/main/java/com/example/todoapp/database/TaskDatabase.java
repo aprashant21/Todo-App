@@ -34,9 +34,6 @@ public abstract class TaskDatabase extends RoomDatabase {
                         TaskDao taskDao = sInstance.taskDao();
                         taskDao.deleteAll(); //it cleans state
 
-
-
-
                     });
                 }
             };

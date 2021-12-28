@@ -83,9 +83,6 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
         todayChip.setOnClickListener(this);
         tomorrowChip.setOnClickListener(this);
 
-
-
-
         return view;
     }
 
@@ -108,7 +105,15 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
                 priorityMedium.setChecked(true);
             }
             endDate = task.getEndDate();
+            calendar.setTime(endDate);
+            calendarView.setDate(endDate.getTime());
 
+
+        }
+        else{
+            sharedViewModel.setIsEdit(false);
+            taskTitle.setText("");
+            taskDetails.setText("");
         }
 
     }
@@ -202,6 +207,7 @@ public class TodoAddFragment extends Fragment implements View.OnClickListener {
             updateTask.setCompleted(false);
             TaskViewModel.update(updateTask);
             sharedViewModel.setIsEdit(false);
+
 
         }
         else {

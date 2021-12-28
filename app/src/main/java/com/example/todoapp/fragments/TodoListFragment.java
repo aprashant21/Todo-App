@@ -17,6 +17,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.example.todoapp.R;
 import com.example.todoapp.adapter.TaskAdapter;
 import com.example.todoapp.models.SharedViewModel;
@@ -33,6 +36,8 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
     private TaskViewModel todoListViewModel;
     private SharedViewModel sharedViewModel;
     private TaskAdapter adapter;
+    private boolean isEdit;
+    private ImageView noDataImage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,9 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
         //find view by their ids
         fabButton = view.findViewById(R.id.fab_button);
         recyclerView = view.findViewById(R.id.recyclerView_task);
-
+        noDataImage = view.findViewById(R.id.no_data_gif);
+        Glide.with(getContext()).load(R.drawable.no_data).into(noDataImage);
+        
         //setting recyclerview adapter
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -70,10 +77,8 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
             public void onClick(View view) {
                 if(savedInstanceState==null) {
                     TodoAddFragment fragment = TodoAddFragment.newInstance();
-                    FragmentManager fm = getParentFragmentManager();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-
-
                 }
             }
         });
@@ -82,6 +87,7 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
             @Override
             public void onChanged(List<Task> tasks) {
                 adapter = new TaskAdapter(tasks,TodoListFragment.this);
+                noDataImage.setVisibility(tasks.isEmpty() ? View.VISIBLE : View.GONE);
                 if(tasks!=null) {
                     recyclerView.setAdapter(adapter);
                 }
@@ -91,13 +97,14 @@ public class TodoListFragment extends Fragment implements TaskAdapter.TodoClickL
 
     @Override
     public void toDoClick(Task task) {
-        TodoAddFragment fragment = TodoAddFragment.newInstance();
+        TodoAddFragment fragment = new TodoAddFragment();
         sharedViewModel.selectItem(task);
         sharedViewModel.setIsEdit(true);
         FragmentManager fm = getParentFragmentManager();
-        fm.beginTransaction().replace(R.id.fragment_container,fragment ).addToBackStack(null).commit();
+        fm.beginTransaction().replace(R.id.fragment_container,fragment ).addToBackStack("add").commit();
 
     }
+
 
     @Override
     public void toDoRadioButtonClick(Task task) {
